@@ -1,0 +1,86 @@
+### Please use the Rest Client Extension from VS Code to run the requests
+### Vars
+@baseUrl = http://localhost:8000/api
+@contentType = application/json
+
+### Signup
+POST {{baseUrl}}/signup/
+Content-Type: {{contentType}}
+
+{
+    "username": "test",
+    "password": "Test123!",
+    "email": "test@tester.com"
+}
+
+### Login + Token for API calls
+POST {{baseUrl}}/login/
+Content-Type: {{contentType}}
+
+{
+    "username": "test",
+    "password": "Test123!"
+}
+
+### Get the token from the login results and place it below
+### The token below is just a sample and will not work
+@token = b1f9d580f501e6740a0a0c41b770bb0b94ef440f
+
+### Stocks
+GET {{baseUrl}}/stocks/
+Authorization: Token {{token}}
+Content-Type: {{contentType}}
+
+### Order Stock
+POST {{baseUrl}}/orders/
+Authorization: Token {{token}}
+Content-Type: {{contentType}}
+
+{
+    "stock_id": "FIR",
+    "quantity": 100,
+    "price": 1,
+    "order_type": "BUY"
+}
+
+### Order Stock
+POST {{baseUrl}}/orders/
+Authorization: Token {{token}}
+Content-Type: {{contentType}}
+
+{
+    "stock_id": "SEC",
+    "quantity": 50,
+    "price": 2,
+    "order_type": "BUY"
+}
+
+### Show Orders
+GET {{baseUrl}}/orders/list/
+Authorization: Token {{token}}
+Content-Type: {{contentType}}
+
+### Portfolio
+GET {{baseUrl}}/portfolio/
+Authorization: Token {{token}}
+Content-Type: {{contentType}}
+
+### Specific Portfolio
+GET {{baseUrl}}/portfolio/SEC/
+Authorization: Token {{token}}
+Content-Type: {{contentType}}
+
+### Orders(Sell ver.)
+POST {{baseUrl}}/orders/
+Authorization: Token {{token}}
+Content-Type: {{contentType}}
+
+{
+    "stock_id": "FIR",
+    "quantity": 20,
+    "price": 1,
+    "order_type": "SELL"
+}
+
+### Optional check order history and portfolio again to verify the SELL
+### Check line 46 and 63
