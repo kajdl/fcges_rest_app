@@ -3,7 +3,7 @@
 ## Installation
 
 ```bash
-# Download the zip file and extract it on you local machine
+# Download the zip file and extract it on your local machine
 
 # Navigate to the project directory or open with your IDE(VS Code) of choice
 cd fcges_rest_app-master
