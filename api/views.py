@@ -27,10 +27,36 @@ class CustomAuthToken(ObtainAuthToken):
             'created': created
         })
     
-class StockListView(generics.ListAPIView):
+class StockListView(generics.ListCreateAPIView):
     serializer_class = StockSerializer
     permission_classes = [permissions.IsAuthenticated]
     queryset = Stock.objects.all()
+
+    def post(self, request, *args, **kwargs):
+        if not(request.user.is_staff):
+            return Response(
+                    {'error': 'User is not admin'},
+                    status=status.HTTP_403_FORBIDDEN
+                )
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+class StockDetailView(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = StockSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    queryset = Stock.objects.all()
+
+    def delete(self, request, *args, **kwargs):
+        if not (request.user.is_staff):
+            return Response(
+                    {'error': 'User is not admin'},
+                    status=status.HTTP_403_FORBIDDEN
+                )
+        else:
+            return super().delete(self, request, *args, **kwargs)
 
 class OrderCreateView(generics.CreateAPIView):
     serializer_class = OrderSerializer
