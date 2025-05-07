@@ -15,18 +15,15 @@ pip install  django djangorestframework
 python manage.py makemigrations api
 python manage.py migrate
 
-# Generate test stocks using Django shell
-python manage.py shell
-from api.models import Stock
-Stock.objects.create(id="FIR", name="First Stock", current_price=1)
-Stock.objects.create(id="SEC", name="Second Stock", current_price=2)
-exit()
-
-# Alternatively you can also create a superuser and create the stocks using the Django Admin page
+# Create a superuser(admin) using the the command below
 python manage.py createsuperuser
 
-# If you opted to create a super user please use http://localhost:8000/admin
+# If you'd like to use the GUI to create stocks, please use http://localhost:8000/admin
 # Login using the credentials you created and navigate to the stocks page on the api section
+
+# Alternatively you can also use the stocks API to send a post request with your superuser token
+# Just send a JSON body with the id, name and current price to the link below:
+http://localhost:8000/api/stocks/
 
 # Once you're done creating the test stocks
 # If you're using VS Code, I recommend using the Rest Client Extension and use the test.rest file
