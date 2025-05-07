@@ -22,7 +22,7 @@ python manage.py createsuperuser
 # Login using the credentials you created and navigate to the stocks page on the api section
 
 # Alternatively you can also use the stocks API to send a post request with your superuser token
-# Just send a JSON body with the id, name and current price to the link below:
+# Just send a JSON body with the id, name and current_price to the link below:
 http://localhost:8000/api/stocks/
 
 # Once you're done creating the test stocks

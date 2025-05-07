@@ -56,7 +56,8 @@ class StockDetailView(generics.RetrieveUpdateDestroyAPIView):
                     status=status.HTTP_403_FORBIDDEN
                 )
         else:
-            return super().delete(self, request, *args, **kwargs)
+            super().delete(self, request, *args, **kwargs)
+            return Response("Stock was deleted", status=status.HTTP_200_OK)
 
 class OrderCreateView(generics.CreateAPIView):
     serializer_class = OrderSerializer
